@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumas Aleatorias - Ejercicios Matemáticos</title>
+    <link rel="stylesheet" href="styles.css?v=1.0">
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Encabezado -->
+        <header>
+            <h1>🎯 Sumas Aleatorias</h1>
+            <p>¡Practica tus sumas de dos cifras!</p>
+        </header>
+
+        <!-- Panel de puntuación -->
+        <div class="score-panel">
+            <div class="score-item">
+                <span class="score-label">Aciertos:</span>
+                <span id="correct-answers" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Errores:</span>
+                <span id="wrong-answers" class="score-value">0</span>
+            </div>
+        </div>
+
+        <!-- Contenedor de la operación -->
+        <div class="operation-container">
+            <div class="operation">
+                <div class="number-row">
+                    <span id="num1" class="number">0</span>
+                </div>
+                <div class="number-row">
+                    <span class="operator">+</span>
+                    <span id="num2" class="number">0</span>
+                </div>
+                <div class="line"></div>
+                <div class="result-row">
+                    <span class="question-mark">?</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de opciones -->
+        <div class="options-container">
+            <button id="option1" class="option-btn" onclick="checkAnswer(0)">0</button>
+            <button id="option2" class="option-btn" onclick="checkAnswer(1)">0</button>
+            <button id="option3" class="option-btn" onclick="checkAnswer(2)">0</button>
+        </div>
+
+        <!-- Botón para nueva operación -->
+        <button id="new-operation" class="new-btn" onclick="generateNewOperation()" style="display: none;">
+            🎲 Nueva Operación
+        </button>
+
+        <!-- Mensaje de resultado -->
+        <div id="result-message" class="result-message"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js?v=1.0"></script>
+</body>
+</html> 
