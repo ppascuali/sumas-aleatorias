@@ -21,7 +21,6 @@ const optionButtons = [
 ];
 const correctAnswersElement = document.getElementById('correct-answers');
 const wrongAnswersElement = document.getElementById('wrong-answers');
-const newOperationBtn = document.getElementById('new-operation');
 const resultMessage = document.getElementById('result-message');
 
 // Función para generar números aleatorios de dos cifras (10-99)
@@ -87,8 +86,7 @@ function generateNewOperation() {
     // Actualizar la interfaz
     updateInterface();
     
-    // Ocultar botón de nueva operación y mensaje de resultado
-    newOperationBtn.style.display = 'none';
+    // Ocultar mensaje de resultado
     resultMessage.classList.remove('show', 'correct', 'incorrect');
 }
 
@@ -140,8 +138,10 @@ function checkAnswer(selectedIndex) {
         });
     }
     
-    // Mostrar botón de nueva operación
-    newOperationBtn.style.display = 'inline-block';
+    // Generar nueva operación automáticamente después de 2 segundos
+    setTimeout(() => {
+        generateNewOperation();
+    }, 2000);
 }
 
 // Función para mostrar mensaje de respuesta correcta
@@ -214,10 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const index = parseInt(event.key) - 1;
             if (!optionButtons[index].disabled) {
                 checkAnswer(index);
-            }
-        } else if (event.key === 'Enter' || event.key === ' ') {
-            if (newOperationBtn.style.display !== 'none') {
-                generateNewOperation();
             }
         }
     });
