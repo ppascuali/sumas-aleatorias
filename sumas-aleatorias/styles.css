@@ -7,32 +7,112 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #333;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fondo animado con partículas */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+    animation: backgroundShift 15s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(1deg); }
 }
 
 /* Contenedor principal */
 .container {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
+    border-radius: 25px;
     padding: 1.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     text-align: center;
     max-width: 450px;
     width: 90%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 /* Encabezado */
 header h1 {
     color: #4a5568;
     margin-bottom: 0.3rem;
-    font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 
+        3px 3px 0px #667eea,
+        6px 6px 0px #764ba2,
+        9px 9px 0px #f093fb,
+        12px 12px 20px rgba(0, 0, 0, 0.3);
+    animation: titleFloat 3s ease-in-out infinite;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+header h1::before {
+    content: '🎯 Sumas Aleatorias';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #4a5568;
+    text-shadow: 
+        3px 3px 0px #667eea,
+        6px 6px 0px #764ba2,
+        9px 9px 0px #f093fb,
+        12px 12px 20px rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0px) rotateX(0deg); }
+    50% { transform: translateY(-5px) rotateX(5deg); }
 }
 
 header p {
@@ -71,13 +151,55 @@ header p {
     color: #2d3748;
 }
 
+.sound-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: #4a5568;
+}
+
+.sound-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.sound-btn:active {
+    transform: scale(0.95);
+}
+
 /* Contenedor de operación */
 .operation-container {
     margin-bottom: 1rem;
     padding: 1rem;
     background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.operation-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: slideLight 2s ease-in-out infinite;
+}
+
+@keyframes slideLight {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 .operation {
@@ -160,13 +282,34 @@ header p {
     color: white;
     border: none;
     padding: 0.8rem;
-    border-radius: 10px;
+    border-radius: 15px;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 12px rgba(66, 153, 225, 0.3);
+    box-shadow: 
+        0 6px 12px rgba(66, 153, 225, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     width: 180px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.option-btn:hover::before {
+    left: 100%;
 }
 
 .option-btn:hover {
@@ -201,13 +344,14 @@ header p {
 
 /* Mensaje de resultado */
 .result-message {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 10px;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     opacity: 0;
     transition: opacity 0.3s ease;
+    min-height: 20px;
 }
 
 .result-message.show {

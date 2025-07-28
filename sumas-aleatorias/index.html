@@ -25,7 +25,15 @@
                 <span class="score-label">Errores:</span>
                 <span id="wrong-answers" class="score-value">0</span>
             </div>
+            <div class="score-item">
+                <button id="sound-toggle" class="sound-btn" onclick="toggleSound()" title="Activar/Desactivar sonido">
+                    🔊
+                </button>
+            </div>
         </div>
+
+        <!-- Mensaje de resultado -->
+        <div id="result-message" class="result-message"></div>
 
         <!-- Contenedor de la operación -->
         <div class="operation-container">
@@ -52,14 +60,10 @@
             <button id="option2" class="option-btn" onclick="checkAnswer(1)">0</button>
             <button id="option3" class="option-btn" onclick="checkAnswer(2)">0</button>
         </div>
-
-
-
-        <!-- Mensaje de resultado -->
-        <div id="result-message" class="result-message"></div>
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=1.0"></script>
+    <script src="sounds.js?v=1.0"></script>
+    <script src="script.js?v=1.1"></script>
 </body>
 </html> 

@@ -88,6 +88,9 @@ function generateNewOperation() {
     
     // Ocultar mensaje de resultado
     resultMessage.classList.remove('show', 'correct', 'incorrect');
+    
+    // Reproducir sonido de nueva operación
+    soundManager.playNewOperation();
 }
 
 // Función para actualizar la interfaz
@@ -113,6 +116,9 @@ function checkAnswer(selectedIndex) {
     const selectedAnswer = currentOperation.options[selectedIndex];
     const isCorrect = selectedAnswer === currentOperation.correctAnswer;
     
+    // Reproducir sonido de clic en botón
+    soundManager.playButtonClick();
+    
     // Deshabilitar todos los botones
     optionButtons.forEach(button => {
         button.disabled = true;
@@ -125,10 +131,14 @@ function checkAnswer(selectedIndex) {
         scores.correct++;
         showCorrectMessage();
         createCelebration();
+        // Reproducir melodía de acierto
+        soundManager.playCorrectMelody();
     } else {
         optionButtons[selectedIndex].classList.add('incorrect');
         scores.wrong++;
         showIncorrectMessage();
+        // Reproducir melodía de error
+        soundManager.playIncorrectMelody();
         
         // Mostrar cuál era la respuesta correcta
         optionButtons.forEach((button, index) => {
@@ -205,6 +215,9 @@ function resetGame() {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Activar audio al cargar la página
+    activateAudio();
+    
     // Generar la primera operación al cargar la página
     generateNewOperation();
     
@@ -217,6 +230,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Agregar event listener para activar audio con clic
+    document.addEventListener('click', function() {
+        activateAudio();
+    }, { once: true });
 });
 
 // Función para exportar puntuación (opcional)
@@ -230,4 +248,18 @@ function exportScore() {
     
     console.log('Puntuación actual:', scoreData);
     return scoreData;
+}
+
+// Función para alternar el sonido
+function toggleSound() {
+    const isEnabled = soundManager.toggleSound();
+    const soundBtn = document.getElementById('sound-toggle');
+    
+    if (isEnabled) {
+        soundBtn.textContent = '🔊';
+        soundBtn.title = 'Desactivar sonido';
+    } else {
+        soundBtn.textContent = '🔇';
+        soundBtn.title = 'Activar sonido';
+    }
 } 
